@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Navigation Display</title>
+\        <script>
+            //----------------------------------------------------------------------------------------------------PERMUTATION--------------------------------------------------
+            function permutation() {
+                // Get values from the input fields
+                var n = parseInt(document.getElementById('permuN').value);
+                var r = parseInt(document.getElementById('permuR').value);
+            
+                // Calculate the factorial of a number
+                function factorial(num) {
+                    if (num === 0 || num === 1) {
+                        document.getElementById('permuSolutionArea').innerHTML = "n must be greater than or equal to r<br><br>";
+                        return 1;
+                    } else {
+                        return num * factorial(num - 1);
+                    }
+                }
+            
+                // Calculate permutation (nPr)
+                var permutation = factorial(n) / factorial(n - r);
+                
+                // Display the result
+                var resultParagraph = document.getElementById('permuAnswerArea');
+                resultParagraph.innerHTML = "P (" + n + ", " + r + ") = " + permutation;
+                
+                // Display solution steps in a different paragraph
+                var solutionParagraph = document.getElementById('permuSolutionArea');
+                minus = n - r;
+                var solution = ">> n! / (n-r)!<br>";
+                solution += ">> " + n + "! / (" + n + "-" + r + ")!<br>";
+                solution += ">> " + factorial(n) + " / " + minus + "!<br>";
+                solution += ">> " + factorial(n) + " / " + factorial(n - r) + "<br>";
+                solution += ">> " + permutation  + "<br><br>";
+                
+                solutionParagraph.innerHTML = solution;
+            }
+            
+            function permuClearFields() {
+                document.getElementById('permuN').value = '';
+                document.getElementById('permuR').value = '';
+                document.getElementById('permuAnswerArea').innerHTML = '';
+                document.getElementById('permuSolutionArea').innerHTML = '';
+            }
+
+            //----------------------------------------------------------------------------------------------------COMBINATION--------------------------------------------------
+            function combination() {
+              // Get values from the input fields
+              var n = parseInt(document.getElementById('combiN').value);
+              var r = parseInt(document.getElementById('combiR').value);
+              
+              // Calculate the factorial of a number
+              function factorial(num) {
+                if (num === 0 || num === 1) {
+                    document.getElementById('combiSolutionArea').innerHTML = "n must be greater than or equal to r<br><br>";
+                    return 1;
+                } else {
+                    return num * factorial(num - 1);
+                }
+              }
+              
+              // Calculate combination (nCr)
+              var combination = factorial(n) / (factorial(r) * factorial(n - r));
+              
+              
+              // Display the result
+              var resultParagraph = document.getElementById('combiAnswerArea');
+              resultParagraph.innerHTML = n + "C" + r + " = " + combination + "<br><br>";
+              
+              // Display solution steps
+              var solutionParagraph = document.getElementById('combiSolutionArea');
+              minus = n - r;
+              var solution = ">> n! / (r! * (n-r)!)<br>";
+              solution += ">> " + n + "! / (" + r + "! * (" + n + "-" + r + ")!)<br>";
+              solution += ">> " + factorial(n) + " / (" + factorial(r) + " * " + minus + "!)<br>";
+              solution += ">> " + factorial(n) + " / (" + factorial(r) + " * " + factorial(n - r) + ")<br>";
+              solution += ">> " + factorial(n) + " / " + factorial(r) * factorial(n - r) + "<br>";
+              solution += ">> " + combination + "<br><br>";
+              
+              solutionParagraph.innerHTML += solution;
+            }
+
+            function combiClearFields() {
+                document.getElementById('combiN').value = '';
+                document.getElementById('combiR').value = '';
+                document.getElementById('combiAnswerArea').innerHTML = '';
+                document.getElementById('combiSolutionArea').innerHTML = '';
+            }
+
+            //----------------------------------------------------------------------------------------------------FIBONACCI SEQUENCE--------------------------------------------------
+            function fibonacci() {
+                // Get value for 'n'
+                var n = parseInt(document.getElementById('fiboN').value);
+                
+                // Calculate Fibonacci sequence
+                function fibonacci(n) {
+                    if (n <= 1) {
+                        return n;
+                    } else {
+                        return fibonacci(n - 1) + fibonacci(n - 2);
+                    }
+                }
+                
+                // Display the result
+                var resultParagraph = document.getElementById('fiboAnswerArea');
+                resultParagraph.innerHTML = "n = " + n + ": <br><br>";
+                
+                var sequence = "";
+                for (var i = 0; i < n; i++) {
+                    sequence += fibonacci(i) + ", ";
+                }
+                
+                resultParagraph.innerHTML += sequence;
+                
+                // Display solution steps in a different paragraph
+                var solutionParagraph = document.getElementById('fiboSolutionArea');
+                solutionParagraph.innerHTML;
+               
+                var steps = "";
+                var stepResult = "";
+                for (var j = 0; j < n; j++) {
+                    if (j === 0) {
+                        steps += "Step " + (j + 1) + ": " + 0 + "<br>";
+                        stepResult += "0 ";
+                    } else if (j === 1) {
+                        steps += "Step " + (j + 1) + ": " + 1 + "<br>";
+                        stepResult += "1 ";
+                    } else {
+                        var currentStep = fibonacci(j - 1) + fibonacci(j - 2);
+                        steps += "Step " + (j + 1) + ": " + fibonacci(j - 1) + " + " + fibonacci(j - 2) + " = " + currentStep + "<br>";
+                        stepResult += currentStep + " ";
+                    }
+                }
+                
+                solutionParagraph.innerHTML += steps + "<br><br>";
+                
+            }
+                
+            function fiboClearFields() {
+                document.getElementById('fiboN').value = '';
+                document.getElementById('fiboAnswerArea').innerHTML = '';
+                document.getElementById('fiboSolutionArea').innerHTML = '';
+            }
+
+            //----------------------------------------------------------------------------------------------------LUCAS SEQUENCE--------------------------------------------------
+            function lucas() {
+                // Get value for 'n'
+                var n = parseInt(document.getElementById('lucaN').value);
+                
+                // Calculate Lucas sequence
+                function lucas(n) {
+                    if (n === 0) {
+                        return 2;
+                    } else if (n === 1) {
+                        return 1;
+                    } else {
+                        return lucas(n - 1) + lucas(n - 2);
+                    }
+                }
+                
+                // Display the result
+                var resultParagraph = document.getElementById('lucaAnswerArea');
+                resultParagraph.innerHTML = "n = " + n + ": <br><br>";
+                
+                var sequence = "";
+                for (var i = 0; i < n; i++) {
+                    sequence += lucas(i) + ", ";
+                }
+                
+                resultParagraph.innerHTML += sequence;
+                
+                // Display solution steps in a different paragraph
+                var solutionParagraph = document.getElementById('lucaSolutionArea');
+                solutionParagraph.innerHTML;
+                
+                var steps = "";
+                var stepResult = "";
+                for (var j = 0; j < n; j++) {
+                    if (j === 0) {
+                        steps += "Step " + (j + 1) + ": " + 2 + "<br>";
+                        stepResult += "2 ";
+                    } else if (j === 1) {
+                        steps += "Step " + (j + 1) + ": " + 1 + "<br>";
+                        stepResult += "1 ";
+                    } else {
+                        var currentStep = lucas(j - 1) + lucas(j - 2);
+                        steps += "Step " + (j + 1) + ": " + lucas(j - 1) + " + " + lucas(j - 2) + " = " + currentStep + "<br>";
+                        stepResult += currentStep + " ";
+                    }
+                }
+                
+                solutionParagraph.innerHTML += steps + "<br><br>";
+                }
+                
+                function lucaClearFields() {
+                document.getElementById('lucaN').value = '';
+                document.getElementById('lucaAnswerArea').innerHTML = '';
+                document.getElementById('lucaSolutionArea').innerHTML = '';
+            }
+
+            activeNav.addEventListener('click', () => {
+                container1.classList.add('active');
+            } );
+          </script>
+
+        <style>
+            body {
+                font-family: Verdana, Geneva, Tahoma, sans-serif;
+                margin: 0;
+                margin-top: -1.5%;
+                padding: 0;
+                width: 100%;
+                max-height: 90vh;
+                background-image: url(back.jpg);
+                background-color: #CCF2F4;
+                overflow: hidden;
+            }
+
+            header {
+                text-align: left;
+                background-color: #005792;
+                border: 1px solid #005792;
+                color: #ffffff;
+                padding-left: 2%;
+            }
+
+            header h3 {
+                float: left;
+            }
+
+            nav {
+                transform: translateX(50%);
+                background-color: #8FBAF3;
+                background-color: transparent;
+                backdrop-filter: blur(20px);
+                
+            }
+
+            nav ul {
+                list-style: none;
+                padding: 0;
+                display: flex;
+                justify-content: center;
+                border: 2px solid #85F4FF; 
+                /*background-color: #85F4FF;*/
+                width: 35%;
+                margin: right;
+                margin-top: 1%;
+                margin-bottom: 1%;          
+            }
+
+            nav li {
+                margin-right: 1%;
+                padding: 1%;
+            }
+
+            nav a {
+                width: 100%;
+                text-decoration: none;
+                color: #000000;
+                padding: 5px;
+                font-family: Verdana, Geneva, Tahoma, sans-serif;
+            }
+
+            nav ul li a:hover {
+                background-color: #005792;
+                color: #ffffff;
+            }
+
+            nav ul li a:active {
+                color: #34a0ff;
+            }
+
+            .container {
+                position: relative;
+                width: 100%;
+                height: 100%;
+                transform: translateY(5%);
+            }
+
+            .section {
+                display: none;
+                width: 100%;
+                height: 100%;
+            }
+
+            .section:target {
+                display: block;
+            }
+
+            .section .out {
+                position: relative;
+                width: 28%;
+                height: 77vh;
+                float: left;
+                border: 0px solid #85F4FF;
+                animation: slideLeft 1s forwards ease;
+                top: 0px;
+                left: 1.3%;
+                border-radius: 5%;
+                background-color: #abfcff;
+                padding: 2%;
+                overflow: auto;
+            }
+
+            .section .out .info {
+                position: relative;
+                height: 95%;
+                background-color: #7bcfff;
+                padding: 5%;
+                padding-top: 1%;
+                border-radius: 5%;
+                transition: .5s ease 0s;
+            }
+
+            .section .out .info:hover {
+                transform: scale(105%);
+            }
+
+            .section #section2 {
+                height: 60vh;
+            }
+            
+            .section p {
+                text-align: justify;
+            }
+
+            .section .calcu {
+                position: relative;
+                width: 60%;
+                height: 77vh;
+                border: 0px solid #000000;
+                animation: slideRight 1s forwards ease;
+                left: 34.5%;
+                top: 0px;
+                border-radius: 3%;
+                background-color: #A6F6FF;
+                padding: 2%;
+            }
+
+            .section .calcu .input {
+                position: relative;
+                float: left;
+                left: -50%;
+                width: 40%;
+                height: 97.5%;
+                background-color: #ABD9FF;
+                border-top-left-radius: 6%;
+                border-bottom-left-radius: 6%;
+                padding-top: 1%;
+                padding-left: 2%;
+                box-shadow: -15px -15px 20px #7bcfff, 10px 15px 20px #7bcfff;
+                border: 3px solid #053b77;
+            }
+
+            .section .calcu .input label {
+                font-family: cursive;
+            }
+
+            .section .calcu .input input {
+                width: 99%;
+                height: 10%;
+                font-size: 100%;
+                border: none;
+                outline: none;
+            }
+
+            .section .calcu .input button {
+                font-family: cursive;
+                width: 28%;
+                height: 10%;
+                font-size: 100%;
+                border-radius: 10%;
+                background-color: #005792;
+                color: #ffffff;
+            }
+
+            .section .calcu .input button:active {
+                background-color: #7bcfff;
+                color: #000000;
+            }
+
+            .section .calcu .solution {
+                position: relative;
+                top: -105.3%;
+                left: 42%;
+                width: 52%;
+                height: 98.4%;
+                background-color: #EFFFFD;
+                overflow: auto;
+                border-top-right-radius: 6%;
+                border-bottom-right-radius: 6%;
+                padding-top: .5%;
+                padding-left: 3%;
+                padding-right: 3%;
+                text-align: left;
+                box-shadow: -10px -15px 20px #7bcfff, 15px 15px 20px #7bcfff;
+                border: 3px solid #053b77;
+            }
+
+            .section .calcu .input .topAll {
+                width: 95%;
+                height: 50%;
+            }
+
+            .section .calcu .input .topAll h3{
+                padding: 2%;
+                background-color: #003354;
+                color: #ffffff;
+                text-align: center;
+            }
+
+            .section .calcu .input .answerAreaAll {
+                position: relative ;
+                width: 90%;
+                height: 35%;
+                background-color: aliceblue;
+                overflow: auto;
+                border-radius: 5%;
+                padding: 3%;
+                top: 3%;
+            }
+            
+            .section .calcu .input .answerAreaAll h4 {
+                position: relative;
+                top: -10%;
+            }
+            
+            @keyframes slideUp {
+                0% {transform: translateY(20%);}
+                100% {transform: translateY(2.5%);}
+            }
+
+            @keyframes slideDown {
+                0% {transform: translateY(-20%);}
+                100% {transform: translateY(2.5%);}
+            }
+
+            @keyframes slideLeft {
+                0% {transform: translateX(-10%);}
+                100% {transform: translateX(0%);}
+            }
+
+            @keyframes slideRight {
+                0% {transform: translateX(10%);}
+                100% {transform: translateX(0%);}
+            }
+
+        </style>
+    </head>
+    <body>
+        <header>
+            <h3>Mathematicalcu</h3>
+
+            <nav>
+                <ul>
+                    <li><a href="#section1">PERMUTATION</a></li>
+                    <li><a href="#section2">COMBINATION</a></li>
+                    <li><a href="#section3">FIBONACCI</a></li>
+                    <li><a href="#section4">LUCAS</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        
+        
+        <div class="container">
+            <div id="section1" class="section">
+                <div class="out">
+                    <div class="info">
+                        <h2>What is Permutation?</h2>
+                        <p>It is an arrangement
+                            of items in which
+                            ORDER IS IMPORTANT!<br><br>
+
+                            Some Examples of Permutations:<br>
+
+                            >> Lock with a definite sequence<br>
+                            >> Ranking people<br>
+                            >> Specific order in seats<br>
+                            >> Forming digits<br>
+                            >> Sequence of draws<br><br>
+
+                            ́The number of permutations of n <br>
+                            objects taken r at a time is denoted by <br><br>
+
+                            <h4>P ( n, r ) = n! / (n - r)!</h4> 
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="calcu">
+                    <div class="input">
+                        <div class="topAll">
+                            <h3>Permutation Calculator</h3>
+
+                            <label for="permuN">Enter <i>n</i>:</label><br>
+                            <input type="number" id="permuN" min="0"><br><br>
+                            
+                            <label for="permuR">Enter <i>r</i>:</label><br>
+                            <input type="number" id="permuR" min="0"><br><br>
+                            
+                            <button onclick="permutation()">Calculate</button>
+                            <button onclick="permuClearFields()">Clear</button><br>
+                        </div>
+                        
+                        <div class="answerAreaAll">
+                            <h4>Answer:</h4>
+                            <p id="permuAnswerArea"></p>
+                        </div>
+                    </div>
+                    <div class="solution">
+                        <h4>Solution:</h4>
+                        <p id="permuSolutionArea"></p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="section2" class="section">
+                <div class="out">
+                    <div class="info">
+                        <h2>What is Combination?</h2>
+                        <p>It is an arrangement
+                            of items in which
+                            ORDER DOES NOT MATTER! <br><br>
+                            Since the order does not matter in
+                            combinations, there are fewer combinations
+                            than permutations. <br><br>The combinations are a
+                            "subset" of the permutations. <br><br>
+
+                            To find the number of Combinations of
+                            n items chosen r at a time, you can use
+                            the formula <br><br>
+
+                            <h4><sub>n</sub>C<sub>r</sub> = n! / r! (n - r)!, where 0 <= r <= n</h4> 
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="calcu">
+                    <div class="input">
+                        <div class="topAll">
+                            <h3>Combination Calculator</h3>
+                        
+                            <label for="combiN">Enter <i>n</i>:</label><br>
+                            <input type="number" id="combiN" min="0"><br><br>
+                            
+                            <label for="combiR">Enter <i>r</i>:</label><br>
+                            <input type="number" id="combiR" min="0"><br><br>
+                            
+                            <button onclick="combination()">Calculate</button>
+                            <button onclick="combiClearFields()">Clear</button><br>
+                        </div>
+                        
+                        <div class="answerAreaAll">
+                            <h4>Answer:</h4>
+                            <p id="combiAnswerArea"></p>
+                        </div>
+                    </div>
+                    <div class="solution">
+                        <h4>Solution:</h4>
+                        <p id="combiSolutionArea"></p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="section3" class="section">
+                <div class="out">
+                    <div class="info">
+                        <h2>What is Fibonacci Sequence?</h2>
+                        <p>is a set of numbers such that each number in the sequence is the sum of the two numbers that immediately proceed it. <br><br>
+                            The fibonacci numbers F<sub>n</sub> has the following initial value: <br><br>
+                            F<sub>0</sub> = 0 <br>
+                            F<sub>1</sub> = 1 <br><br>
+
+                            And the recursion of the sequence of numbers is: <br><br>
+
+                            <h4>F<sub>n</sub> = F<sub>n-1</sub> + F<sub>n-2</sub>, whenever n >= 2</h4>
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="calcu">
+                    <div class="input">
+                        <div class="topAll">
+                            <h3>Fibonacci Sequence Calculator</h3>
+                        
+                            <label for="fiboN">Enter <i>n</i>:</label><br>
+                            <input type="number" id="fiboN" min="0"><br><br>
+                            
+                            <button onclick="fibonacci()">Calculate</button>
+                            <button onclick="fiboClearFields()">Clear</button><br>  
+                        </div>
+                        
+                        <div class="answerAreaAll">
+                            <h4>Answer:</h4>
+                            <p id="fiboAnswerArea"></p>
+                        </div>
+                    </div>
+                    <div class="solution">
+                        <h4>Solution:</h4>
+                        <p id="fiboSolutionArea"></p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="section4" class="section">
+                <div class="out">
+                    <div class="info">
+                        <h2>What is Lucas Sequence?</h2>
+                        <p>L<sub>n</sub> has the following initial values: <br><br>
+                            L<sub>0</sub> = 2 <br>
+                            L<sub>1</sub> = 1 <br><br>
+
+                            And the recursion of the sequence of no. is: <br><br>
+
+                            <h4>L<sub>n</sub> = L<sub>n-1</sub> + L<sub>n-2</sub>, whenever n >= 2</h4>
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="calcu">
+                    <div class="input">
+
+                        <div class="topAll">
+                            <h3>Lucas Sequence Calculator</h3>
+                        
+                            <label for="lucaN">Enter <i>n</i>:</label><br>
+                            <input type="number" id="lucaN" min="0"><br><br>
+                            
+                            <button onclick="lucas()">Calculate</button>
+                            <button onclick="lucaClearFields()">Clear</button><br>
+                        </div>
+                        
+                        <div class="answerAreaAll">
+                            <h4>Answer:</h4>
+                            <p id="lucaAnswerArea"></p>
+                        </div>
+                    </div>
+                    <div class="solution">
+                        <h4>Solution:</h4>
+                        <p id="lucaSolutionArea"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
